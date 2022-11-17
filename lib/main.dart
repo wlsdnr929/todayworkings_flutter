@@ -1,3 +1,4 @@
+import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 import 'package:todayworkings/check_list.dart';
@@ -24,20 +25,14 @@ class MyApp extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.white,
         ),
-        body: SnappingSheet(
-          //모달 손잡이 오바해서 잡아땡기기 가능 여부
-          lockOverflowDrag: true,
-          // 메인 페이지
-          child: Back(),
-          //모달 손잡이 높이
-          grabbingHeight: 75,
-
-          //아래쪽 모달
-          sheetBelow: SnappingSheetContent(
-            draggable: true,
-            // TODO: Add your sheet content here
-            child: Modal(),
-          ),
+        body: DraggableBottomSheet(
+          minExtent: 150,
+          useSafeArea: false,
+          curve: Curves.easeIn,
+          previewWidget: PreModal(),
+          expandedWidget: Modal(),
+          backgroundWidget: Back(),
+          onDragging: (pos) {},
         ),
       ),
     );

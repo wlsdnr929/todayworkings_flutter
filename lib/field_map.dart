@@ -43,10 +43,9 @@ class Back extends StatelessWidget {
                 return Row(
                   children: [
                     Chip(
-                      
                       labelPadding: EdgeInsets.all(2.0),
                       avatar: CircleAvatar(
-                        foregroundImage: svg_provider.Svg(image_list[index]),
+                        //foregroundImage: svg_provider.Svg(image_list[index]),
                         backgroundColor: Colors.white70,
                       ),
                       label: Text(
@@ -109,12 +108,12 @@ class Modal extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Color(0xFFEAF2FF),
-                      image: DecorationImage(
-                        image: svg_provider.Svg(
-                          'assets/images/danger.svg',
-                          size: Size(36, 36),
-                        ),
-                      ),
+                      // image: DecorationImage(
+                      //   image: svg_provider.Svg(
+                      //     'assets/images/danger.svg',
+                      //     size: Size(36, 36),
+                      //   ),
+                      // ),
                     ),
                   ),
                   SizedBox(
@@ -134,12 +133,12 @@ class Modal extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Color(0xFFEAF2FF),
-                      image: DecorationImage(
-                        image: svg_provider.Svg(
-                          'assets/images/progress.svg',
-                          size: Size(36, 36),
-                        ),
-                      ),
+                      // image: DecorationImage(
+                      //   image: svg_provider.Svg(
+                      //     'assets/images/progress.svg',
+                      //     size: Size(36, 36),
+                      //   ),
+                      // ),
                     ),
                   ),
                   SizedBox(
@@ -159,12 +158,12 @@ class Modal extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Color(0xFFEAF2FF),
-                      image: DecorationImage(
-                        image: svg_provider.Svg(
-                          'assets/images/person.svg',
-                          size: Size(36, 36),
-                        ),
-                      ),
+                      // image: DecorationImage(
+                      //   image: svg_provider.Svg(
+                      //     'assets/images/person.svg',
+                      //     size: Size(36, 36),
+                      //   ),
+                      // ),
                     ),
                   ),
                   SizedBox(
@@ -184,12 +183,12 @@ class Modal extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Color(0xFFEAF2FF),
-                      image: DecorationImage(
-                        image: svg_provider.Svg(
-                          'assets/images/rubber_cone.svg',
-                          size: Size(36, 36),
-                        ),
-                      ),
+                      // image: DecorationImage(
+                      //   image: svg_provider.Svg(
+                      //     'assets/images/rubber_cone.svg',
+                      //     size: Size(36, 36),
+                      //   ),
+                      // ),
                     ),
                   ),
                   SizedBox(
@@ -228,5 +227,35 @@ class Modal extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class PreModal extends StatelessWidget {
+  const PreModal({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        width: 360,
+        height: 118,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              width: 134,
+              height: 3,
+              color: Colors.grey,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+                width: 320,
+                height: 44,
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(10))),
+          ],
+        ));
   }
 }
