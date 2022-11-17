@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 import 'package:todayworkings/check_list.dart';
 import 'package:todayworkings/field_map.dart';
+import 'package:todayworkings/working_content.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,25 +16,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        canvasColor: Colors.transparent,
+      ),
+      //home: WorkingContent(),
       home: Scaffold(
-        backgroundColor: Colors.white,
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.white.withOpacity(0.8),
         appBar: AppBar(
+          centerTitle: true,
           title: Text(
-            '현장지도',
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+            '현장 지도',
+            style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
           ),
           elevation: 0,
           backgroundColor: Colors.white,
         ),
-        body: DraggableBottomSheet(
-          minExtent: 150,
-          useSafeArea: false,
-          curve: Curves.easeIn,
-          previewWidget: PreModal(),
-          expandedWidget: Modal(),
-          backgroundWidget: Back(),
-          onDragging: (pos) {},
-        ),
+        body: Back(),
       ),
     );
   }
