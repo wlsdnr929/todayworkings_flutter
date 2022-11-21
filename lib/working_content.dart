@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:todayworkings/worker_phone_list.dart';
 
 class WorkingContent extends StatelessWidget {
   WorkingContent({super.key});
@@ -170,9 +169,25 @@ class WorkingContent extends StatelessWidget {
                             SizedBox(
                               height: 8,
                             ),
-                            Text(
-                              '123명',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                minimumSize: Size.zero,
+                                padding: EdgeInsets.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            WorkerPhoneList()));
+                              },
+                              child: Text(
+                                '123명',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              ),
                             ),
                           ],
                         ),
