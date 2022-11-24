@@ -9,6 +9,7 @@ class WorkerPhoneList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
         backgroundColor: Colors.white,
         centerTitle: true,
@@ -16,6 +17,15 @@ class WorkerPhoneList extends StatelessWidget {
           '근무자',
           style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.menu,
+              color: Colors.grey[400],
+            ),
+          )
+        ],
       ),
       body: Stack(
         children: [
@@ -71,14 +81,12 @@ class WorkerPhoneList extends StatelessWidget {
               alignment: Alignment.center,
               height: 60,
               color: Color(0xff3988FF),
-              child: Expanded(
-                child: Text(
-                  '작업 중인 근로자 수 : 20명',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
+              child: Text(
+                '작업 중인 근로자 수 : 20명',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
             ),
           )

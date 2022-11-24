@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:snapping_sheet/snapping_sheet.dart';
 import 'package:todayworkings/check_list.dart';
 import 'package:todayworkings/field_map.dart';
+import 'package:todayworkings/floor_info.dart';
 import 'package:todayworkings/worker_phone_list.dart';
 import 'package:todayworkings/working_content.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         canvasColor: Colors.transparent,
       ),
-      //home: WorkerPhoneList(),
+      //home: FloorInfo(),
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white.withOpacity(0.8),

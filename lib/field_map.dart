@@ -301,7 +301,7 @@ class PreModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: 360,
-        height: 118,
+        height: 130,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -327,7 +327,7 @@ class PreModal extends StatelessWidget {
             ),
             Container(
               width: 320,
-              height: 44,
+              height: 50,
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(10),

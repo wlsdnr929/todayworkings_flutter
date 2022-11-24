@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todayworkings/floor_info.dart';
 import 'package:todayworkings/worker_phone_list.dart';
 
 class WorkingContent extends StatelessWidget {
   WorkingContent({super.key});
+  var floor_list = [];
   var image_list = [
     'assets/images/big_danger.png',
     'assets/images/big_progress.png',
@@ -14,6 +16,7 @@ class WorkingContent extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
         backgroundColor: Colors.white,
         centerTitle: true,
@@ -24,9 +27,13 @@ class WorkingContent extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.menu,
+            child: IconButton(
+              icon: Icon(Icons.menu),
               color: Colors.grey[400],
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => FloorInfo()));
+              },
             ),
           )
         ],
@@ -154,42 +161,36 @@ class WorkingContent extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Column(
-                          children: [
-                            Container(
-                              height: 56,
-                              width: 56,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Color(0xFFEAF2FF),
-                                image: DecorationImage(
-                                    image: AssetImage(image_list[2])),
+                        InkWell(
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 56,
+                                width: 56,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color(0xFFEAF2FF),
+                                  image: DecorationImage(
+                                      image: AssetImage(image_list[2])),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              SizedBox(
+                                height: 8,
                               ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            WorkerPhoneList()));
-                              },
-                              child: Text(
+                              Text(
                                 '123명',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => WorkerPhoneList()));
+                          },
                         ),
                         Column(
                           children: [
