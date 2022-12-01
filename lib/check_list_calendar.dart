@@ -94,175 +94,129 @@ class CalendarModal extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 350,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
+    return Stack(
+      children: [
+        Container(
+          height: 450,
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              children: [
+                Container(
+                  height: 4,
+                  width: 134,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.grey[400]),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CalendarModalListItem(),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
+        Positioned.fill(
+          bottom: 20,
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              child: InkWell(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color(0xff3988FF),
+                  ),
+                  alignment: Alignment.center,
+                  height: 60,
+                  width: 350,
+                  child: Text(
+                    '오늘의 점검 시작',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+                onTap: () {},
+              ),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class CalendarModalListItem extends StatelessWidget {
+  const CalendarModalListItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 360,
+      height: 160,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              Container(
-                height: 4,
-                width: 134,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.grey[400]),
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Chip(
+              label: Container(
+                alignment: Alignment.center,
+                width: 50,
+                child: Text(
+                  '진행 중',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    '여기 아직 수정 안 했음,,,',
-                    style:
-                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.w800),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    '인천 연수구 송도대로 123',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.grey[400]),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                            height: 56,
-                            width: 56,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color(0xFFEAF2FF),
-                              image: DecorationImage(
-                                image: AssetImage(image_list[0]),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            '2건',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            height: 56,
-                            width: 56,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color(0xFFEAF2FF),
-                              image: DecorationImage(
-                                  image: AssetImage(image_list[1])),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            '34%',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            height: 56,
-                            width: 56,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color(0xFFEAF2FF),
-                              image: DecorationImage(
-                                  image: AssetImage(image_list[2])),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            '123명',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            height: 56,
-                            width: 56,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color(0xFFEAF2FF),
-                              image: DecorationImage(
-                                  image: AssetImage(image_list[3])),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            '약간위험',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 24,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 60,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(80)),
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          backgroundColor: Color(0xff3988FF),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)))),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CheckList()));
-                      },
-                      child: Text(
-                        '작업내용',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+              backgroundColor: Color(0xff3988FF),
+            ),
+            Text(
+              '김안전',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 16),
+            ),
+            Text(
+              '안전점검 이름',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            ),
+            Text(
+              '2022.04.05. 16:30',
+              style: TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 16),
+            ),
+          ],
         ),
       ),
     );
