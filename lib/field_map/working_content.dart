@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todayworkings/floor_info.dart';
-import 'package:todayworkings/worker_phone_list.dart';
+import 'package:todayworkings/field_map/floor_info.dart';
+import 'package:todayworkings/field_map/worker_phone_list.dart';
 
 class WorkingContent extends StatelessWidget {
   WorkingContent({super.key});

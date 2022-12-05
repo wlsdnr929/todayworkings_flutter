@@ -1,10 +1,11 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:todayworkings/check_list.dart';
+import 'package:todayworkings/check_list/check_list.dart';
 
-import 'field_map.dart';
+import '../field_map/field_map.dart';
 
 class CheckListCalendar extends StatefulWidget {
   const CheckListCalendar({super.key});
@@ -17,6 +18,15 @@ class _CheckListCalendarState extends State<CheckListCalendar> {
   var _selectedDay; // 클릭한 날짜
   var _focusedDay = DateTime.now();
 
+  Map<DateTime, List<Event>> events = {
+    DateTime.utc(2022, 12, 7): [Event('title'), Event('title2')],
+    DateTime.utc(2022, 12, 16): [Event('title3')],
+  };
+
+  List<Event> _getEventsForDay(DateTime day) {
+    return events[day] ?? [];
+  }
+
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting();
@@ -26,7 +36,7 @@ class _CheckListCalendarState extends State<CheckListCalendar> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          '현장 지도',
+          '현장 점검',
           style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
         ),
         elevation: 0,
@@ -47,6 +57,7 @@ class _CheckListCalendarState extends State<CheckListCalendar> {
             headerStyle:
                 HeaderStyle(formatButtonVisible: false, titleCentered: true),
             calendarStyle: CalendarStyle(
+              markerSize: 5,
               todayDecoration: BoxDecoration(
                 color: Colors.transparent,
                 shape: BoxShape.circle,
@@ -60,6 +71,12 @@ class _CheckListCalendarState extends State<CheckListCalendar> {
               ),
               selectedTextStyle:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              markerDecoration: BoxDecoration(
+                color: Color(0xff3988FF),
+                shape: BoxShape.circle,
+              ),
+              markersAutoAligned: false,
+              markersAlignment: Alignment.topCenter,
             ),
             selectedDayPredicate: (day) {
               return isSameDay(_selectedDay, day);
@@ -77,6 +94,7 @@ class _CheckListCalendarState extends State<CheckListCalendar> {
                 _focusedDay = focusedDay;
               });
             },
+            eventLoader: _getEventsForDay,
           ),
         ],
       ),
@@ -84,14 +102,15 @@ class _CheckListCalendarState extends State<CheckListCalendar> {
   }
 }
 
+class Event {
+  String title;
+
+  Event(this.title);
+}
+
 class CalendarModal extends StatelessWidget {
   CalendarModal({super.key});
-  var image_list = [
-    'assets/images/big_danger.png',
-    'assets/images/big_progress.png',
-    'assets/images/person.png',
-    'assets/images/rubber_cone.png',
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -166,9 +185,14 @@ class CalendarModal extends StatelessWidget {
   }
 }
 
-class CalendarModalListItem extends StatelessWidget {
+class CalendarModalListItem extends StatefulWidget {
   const CalendarModalListItem({super.key});
 
+  @override
+  State<CalendarModalListItem> createState() => _CalendarModalListItemState();
+}
+
+class _CalendarModalListItemState extends State<CalendarModalListItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -184,16 +208,54 @@ class CalendarModalListItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Chip(
-              label: Container(
-                alignment: Alignment.center,
-                width: 50,
-                child: Text(
-                  '진행 중',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Chip(
+                  label: Container(
+                    alignment: Alignment.center,
+                    width: 50,
+                    child: Text(
+                      '진행 중',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ),
+                  backgroundColor: Color(0xff3988FF),
                 ),
-              ),
-              backgroundColor: Color(0xff3988FF),
+                DropdownButtonHideUnderline(
+                  child: DropdownButton2(
+                    customButton: const Icon(
+                      Icons.more_vert,
+                      size: 25,
+                      color: Colors.grey,
+                    ),
+                    customItemsHeights: [
+                      ...List<double>.filled(MenuItems.firstItems.length, 36),
+                    ],
+                    items: [
+                      ...MenuItems.firstItems.map(
+                        (item) => DropdownMenuItem<MenuItem>(
+                          value: item,
+                          child: MenuItems.buildItem(item),
+                        ),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      MenuItems.onChanged(context, value as MenuItem);
+                    },
+                    itemHeight: 32,
+                    itemPadding: const EdgeInsets.only(left: 16, right: 16),
+                    dropdownWidth: 100,
+                    dropdownPadding: const EdgeInsets.symmetric(vertical: 6),
+                    dropdownDecoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white,
+                    ),
+                    dropdownElevation: 8,
+                    offset: const Offset(-60, 48),
+                  ),
+                ),
+              ],
             ),
             Text(
               '김안전',
@@ -220,5 +282,55 @@ class CalendarModalListItem extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class MenuItem {
+  final String text;
+  //final IconData icon;
+
+  const MenuItem({
+    required this.text,
+    //required this.icon,
+  });
+}
+
+class MenuItems {
+  static const List<MenuItem> firstItems = [content, modify, delete];
+  //static const List<MenuItem> secondItems = [logout];
+
+  static const content = MenuItem(text: '내용보기');
+  static const modify = MenuItem(text: '수정');
+  static const delete = MenuItem(text: '삭제');
+
+  static Widget buildItem(MenuItem item) {
+    return Row(
+      children: [
+        //Icon(item.icon, color: Colors.white, size: 22),
+        const SizedBox(
+          width: 10,
+        ),
+        Text(
+          item.text,
+          style: const TextStyle(
+            color: Colors.black,
+          ),
+        ),
+      ],
+    );
+  }
+
+  static onChanged(BuildContext context, MenuItem item) {
+    switch (item) {
+      case MenuItems.content:
+        //Do something
+        break;
+      case MenuItems.modify:
+        //Do something
+        break;
+      case MenuItems.delete:
+        //Do something
+        break;
+    }
   }
 }

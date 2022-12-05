@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart' as svg_provider;
-import 'package:todayworkings/working_content.dart';
+import 'package:todayworkings/field_map/working_content.dart';
 
 class FieldMap extends StatelessWidget {
   FieldMap({super.key});
