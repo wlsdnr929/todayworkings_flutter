@@ -1,9 +1,12 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:todayworkings/check_list/check_list.dart';
+import 'package:todayworkings/check_list/check_list_detail.dart';
+import 'package:todayworkings/check_list/check_list_modify.dart';
 
 import '../field_map/field_map.dart';
 
@@ -224,6 +227,7 @@ class _CalendarModalListItemState extends State<CalendarModalListItem> {
                 ),
                 DropdownButtonHideUnderline(
                   child: DropdownButton2(
+                    //buttonElevation: 0,
                     customButton: const Icon(
                       Icons.more_vert,
                       size: 25,
@@ -324,12 +328,154 @@ class MenuItems {
     switch (item) {
       case MenuItems.content:
         //Do something
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CheckListDetail(),
+          ),
+        );
         break;
       case MenuItems.modify:
         //Do something
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CheckListModify(),
+          ),
+        );
         break;
       case MenuItems.delete:
         //Do something
+        showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+                title: Text(
+                  '정말 삭제하시겠습니까?',
+                  style:
+                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal),
+                  textAlign: TextAlign.center,
+                ),
+                titlePadding: EdgeInsets.all(16),
+                actions: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Container(
+                          width: 320,
+                          height: 60,
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                                backgroundColor: Color(0xff3988FF),
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)))),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              showDialog(
+                                  barrierDismissible: false,
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      elevation: 0,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5.0)),
+                                      title: Text(
+                                        '삭제되었습니다',
+                                        style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.normal),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      titlePadding: EdgeInsets.all(16),
+                                      actions: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.all(12.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: [
+                                              Container(
+                                                width: 320,
+                                                height: 60,
+                                                child: OutlinedButton(
+                                                  style: OutlinedButton.styleFrom(
+                                                      backgroundColor:
+                                                          Color(0xff3988FF),
+                                                      shape: const RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          10)))),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text(
+                                                    '확인',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: Text(
+                              '확인',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Container(
+                          height: 60,
+                          width: 320,
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                                side: BorderSide(color: Colors.grey, width: 1),
+                                backgroundColor: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)))),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(
+                              '취소',
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            });
+
         break;
     }
   }

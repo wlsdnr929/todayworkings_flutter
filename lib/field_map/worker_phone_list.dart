@@ -76,13 +76,13 @@ class WorkerPhoneList extends StatelessWidget {
           ),
           Positioned(
             width: MediaQuery.of(context).size.width,
-            bottom: 0,
+            bottom: 1,
             child: Container(
               alignment: Alignment.center,
               height: 60,
               color: Color(0xff3988FF),
               child: Text(
-                '작업 중인 근로자 수 : 20명',
+                '수정',
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
