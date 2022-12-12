@@ -46,6 +46,8 @@ dependencies:
 
   # 테스트용 http package 설치
   http: ^0.13.5
+  dio: ^4.0.6
+  get: ^4.6.5
 
 
 dev_dependencies:
