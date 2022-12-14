@@ -32,48 +32,48 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          //canvasColor: Colors.transparent,
-        ),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        //canvasColor: Colors.transparent,
+      ),
 
-        // api 연습
-        home: Scaffold(
-          appBar: AppBar(),
-          body: Center(
-            child: SingleChildScrollView(
-              child: FutureBuilder<ApiResponseData>(
-                  future: ApiService().termsSelect('service'),
-                  builder: (context, snapshot) {
-                    return snapshot.connectionState == ConnectionState.done
-                        ? Text(
-                            snapshot.data!.resultData['terms_name'].toString())
-                        : const CircularProgressIndicator();
-                  }),
-            ),
-          ),
-        )
+      // api 연습
+      // home: Scaffold(
+      //   appBar: AppBar(),
+      //   body: Center(
+      //     child: SingleChildScrollView(
+      //       child: FutureBuilder<ApiResponseData>(
+      //           future: ApiService().termsSelect('service'),
+      //           builder: (context, snapshot) {
+      //             return snapshot.connectionState == ConnectionState.done
+      //                 ? Text(
+      //                     snapshot.data!.resultData['terms_name'].toString())
+      //                 : const CircularProgressIndicator();
+      //           }),
+      //     ),
+      //   ),
+      // )
 
-        // home: Scaffold(
-        //   resizeToAvoidBottomInset: false,
-        //   backgroundColor: Colors.white.withOpacity(0.8),
-        //   appBar: AppBar(
-        //     centerTitle: true,
-        //     title: Text(
-        //       '현장 지도',
-        //       style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
-        //     ),
-        //     elevation: 0,
-        //     backgroundColor: Colors.white,
-        //   ),
-        //   body: Back(),
-        // ),
+      // home: Scaffold(
+      //   resizeToAvoidBottomInset: false,
+      //   backgroundColor: Colors.white.withOpacity(0.8),
+      //   appBar: AppBar(
+      //     centerTitle: true,
+      //     title: Text(
+      //       '현장 지도',
+      //       style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
+      //     ),
+      //     elevation: 0,
+      //     backgroundColor: Colors.white,
+      //   ),
+      //   body: Back(),
+      // ),
 
-        //home: CheckListCalendarDetail(),
-        //home: CheckListCalendar(),
-        //home: CheckListModify(),
+      //home: CheckListCalendarDetail(),
+      //home: CheckListCalendar(),
+      //home: CheckListModify(),
 
-        //home: WriteNotification(),
-        );
+      home: WriteNotification(),
+    );
   }
 }
